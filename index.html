@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频处理学习 - 计算机视觉技术指南</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>VideoLearn</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#basics">基础知识</a></li>
+                <li><a href="#codec">编解码</a></li>
+                <li><a href="#ai">AI处理</a></li>
+                <li><a href="#tools">工具框架</a></li>
+                <li><a href="#resources">资源</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>计算机视频处理</h1>
+            <h2>视频处理技术指南</h2>
+            <p>探索视频处理的前沿技术，从基础原理到AI驱动的智能分析</p>
+            <div class="cta-buttons">
+                <a href="#basics" class="btn primary">开始学习</a>
+                <a href="#resources" class="btn secondary">查看资源</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>视频技术趋势</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">🎬</div>
+                    <h3>H.266/VVC编解码</h3>
+                    <p>新一代视频编码标准，压缩效率比H.265提升50%，支持8K超高清视频</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🤖</div>
+                    <h3>神经网络视频编码</h3>
+                    <p>基于深度学习的端到端视频压缩，超越传统编码方法的性能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>实时AI视频分析</h3>
+                    <p>边缘计算与轻量级模型结合，实现毫秒级视频内容理解</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎨</div>
+                    <h3>视频生成与编辑</h3>
+                    <p>扩散模型与Transformer驱动的视频生成，支持文本到视频的创意制作</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔍</div>
+                    <h3>多模态视频理解</h3>
+                    <p>融合视觉、音频、文本的多模态模型，实现深度的语义分析</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📡</div>
+                    <h3>低延迟流媒体</h3>
+                    <p>优化的传输协议与自适应码率，支持超低延迟的实时视频通信</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="basics" class="section">
+        <div class="container">
+            <h2>基础知识</h2>
+            <div class="topic-list">
+                <div class="topic-item">
+                    <h3>1. 视频表示</h3>
+                    <p>理解帧序列、像素、色彩空间（RGB、YUV）、分辨率、帧率等基本概念</p>
+                    <ul>
+                        <li>帧率（FPS）与流畅度的关系</li>
+                        <li>色彩空间转换与采样格式（4:2:0、4:2:2、4:4:4）</li>
+                        <li>视频容器格式（MP4、MKV、WebM）与编码格式的关系</li>
+                    </ul>
+                </div>
+                <div class="topic-item">
+                    <h3>2. 图像处理基础</h3>
+                    <p>视频本质是图像序列，掌握图像处理技术是视频处理的基础</p>
+                    <ul>
+                        <li>空域与频域滤波</li>
+                        <li>边缘检测与特征提取</li>
+                        <li>图像变换（DCT、DWT、FFT）</li>
+                    </ul>
+                </div>
+                <div class="topic-item">
+                    <h3>3. 运动估计与补偿</h3>
+                    <p>视频压缩的核心技术，通过帧间预测减少冗余</p>
+                    <ul>
+                        <li>块匹配算法（BMA）</li>
+                        <li>光流法</li>
+                        <li>运动矢量表示与优化</li>
+                    </ul>
+                </div>
+                <div class="topic-item">
+                    <h3>4. 视频质量评估</h3>
+                    <p>评估视频处理效果的关键指标</p>
+                    <ul>
+                        <li>客观指标：PSNR、SSIM、VMAF</li>
+                        <li>主观评价方法</li>
+                        <li>无参考质量评估（NR-IQA）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="codec" class="section alt-bg">
+        <div class="container">
+            <h2>视频编解码技术</h2>
+            <div class="codec-grid">
+                <div class="codec-card">
+                    <h3>H.264/AVC</h3>
+                    <span class="tag">标准</span>
+                    <p>广泛应用的视频编码标准，平衡压缩效率与解码复杂度</p>
+                    <div class="spec">
+                        <span>压缩比: 50:1</span>
+                        <span>主流支持</span>
+                    </div>
+                </div>
+                <div class="codec-card featured">
+                    <h3>H.265/HEVC</h3>
+                    <span class="tag hot">主流</span>
+                    <p>比H.264压缩效率提升50%，支持4K/8K视频</p>
+                    <div class="spec">
+                        <span>压缩比: 100:1</span>
+                        <span>广泛应用</span>
+                    </div>
+                </div>
+                <div class="codec-card">
+                    <h3>AV1</h3>
+                    <span class="tag">开源</span>
+                    <p>免版税的新一代编码标准，比H.265更高效</p>
+                    <div class="spec">
+                        <span>压缩比: 120:1</span>
+                        <span>Web首选</span>
+                    </div>
+                </div>
+                <div class="codec-card featured">
+                    <h3>H.266/VVC</h3>
+                    <span class="tag latest">最新标准</span>
+                    <p>最新国际标准，压缩效率比H.265提升50%</p>
+                    <div class="spec">
+                        <span>压缩比: 150:1</span>
+                        <span>8K+支持</span>
+                    </div>
+                </div>
+                <div class="codec-card">
+                    <h3>EVC</h3>
+                    <span class="tag">专利友好</span>
+                    <p>免版税编码标准，适合商业应用</p>
+                    <div class="spec">
+                        <span>压缩比: 90:1</span>
+                        <span>低许可费</span>
+                    </div>
+                </div>
+                <div class="codec-card">
+                    <h3>VP9</h3>
+                    <span class="tag">Google</span>
+                    <p>Google推出的开源编码，YouTube主要格式</p>
+                    <div class="spec">
+                        <span>压缩比: 80:1</span>
+                        <span>Web优化</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-table">
+                <h3>编码标准对比</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>标准</th>
+                            <th>压缩效率</th>
+                            <th>编码复杂度</th>
+                            <th>解码复杂度</th>
+                            <th>硬件支持</th>
+                            <th>典型应用</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>H.264</td>
+                            <td>基准</td>
+                            <td>低</td>
+                            <td>极低</td>
+                            <td>所有设备</td>
+                            <td>传统应用</td>
+                        </tr>
+                        <tr>
+                            <td>H.265</td>
+                            <td>2x</td>
+                            <td>中高</td>
+                            <td>中</td>
+                            <td>广泛</td>
+                            <td>4K流媒体</td>
+                        </tr>
+                        <tr>
+                            <td>AV1</td>
+                            <td>2.3x</td>
+                            <td>高</td>
+                            <td>中高</td>
+                            <td>新增</td>
+                            <td>Web应用</td>
+                        </tr>
+                        <tr>
+                            <td>H.266</td>
+                            <td>3x</td>
+                            <td>极高</td>
+                            <td>高</td>
+                            <td>新兴</td>
+                            <td>8K+内容</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai" class="section">
+        <div class="container">
+            <h2>AI与深度学习视频处理</h2>
+
+            <div class="ai-section">
+                <h3>前沿技术</h3>
+                <div class="ai-grid">
+                    <div class="ai-card">
+                        <h4>神经视频编码 (NVC)</h4>
+                        <p>使用深度学习替代传统变换编码，通过自编码器学习最优压缩表示</p>
+                        <ul>
+                            <li>基于GAN的感知优化编码</li>
+                            <li>率失真优化的神经网络训练</li>
+                            <li>超分辨率辅助编码</li>
+                        </ul>
+                    </div>
+                    <div class="ai-card">
+                        <h4>视频理解与检索</h4>
+                        <p>基于Transformer和CLIP的视频语义理解，支持自然语言检索</p>
+                        <ul>
+                            <li>VideoMAE视频自监督学习</li>
+                            <li>时空注意力机制</li>
+                            <li>多模态视频-文本对齐</li>
+                        </ul>
+                    </div>
+                    <div class="ai-card">
+                        <h4>视频生成与编辑</h4>
+                        <p>扩散模型创造逼真视频内容，支持文本到视频、视频编辑</p>
+                        <ul>
+                            <li>Stable Video Diffusion</li>
+                            <li>Sora类长视频生成</li>
+                            <li>可控视频生成</li>
+                        </ul>
+                    </div>
+                    <div class="ai-card">
+                        <h4>实时视频超分</h4>
+                        <p>轻量级CNN网络实现低延迟的高质量视频超分辨率</p>
+                        <ul>
+                            <li>Real-ESRGAN Video</li>
+                            <li>基于流网络的高效推理</li>
+                            <li>量化加速与部署优化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-frameworks">
+                <h3>推荐框架与工具</h3>
+                <div class="framework-list">
+                    <div class="framework">
+                        <strong>PyTorch Video</strong>
+                        <p>PyTorch生态的视频处理库，提供高效的视频数据加载和预训练模型</p>
+                    </div>
+                    <div class="framework">
+                        <strong>TensorFlow I/O</strong>
+                        <p>TensorFlow的视频IO扩展，支持多种格式和硬件加速</p>
+                    </div>
+                    <div class="framework">
+                        <strong>Decord</strong>
+                        <p>高效的视频解码库，针对深度学习场景优化</p>
+                    </div>
+                    <div class="framework">
+                        <strong>OpenCV</strong>
+                        <p>经典计算机视觉库，视频处理基础功能</p>
+                    </div>
+                    <div class="framework">
+                        <strong>FFmpeg</strong>
+                        <p>完整的视频处理工具链，编解码、转码、滤镜处理</p>
+                    </div>
+                    <div class="framework">
+                        <strong>DaVinci Resolve</strong>
+                        <p>专业视频后期处理，AI辅助调色与修复</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="section alt-bg">
+        <div class="container">
+            <h2>工具与框架</h2>
+
+            <div class="tool-categories">
+                <div class="category">
+                    <h3>开发库</h3>
+                    <ul>
+                        <li><strong>FFmpeg</strong> - 命令行工具 + 库，视频处理的瑞士军刀</li>
+                        <li><strong>OpenCV</strong> - cv2.VideoCapture, cv2.VideoWriter</li>
+                        <li><strong>PyAV</strong> - Python绑定FFmpeg</li>
+                        <li><strong>MoviePy</strong> - 视频编辑Python库</li>
+                    </ul>
+                </div>
+
+                <div class="category">
+                    <h3>AI框架</h3>
+                    <ul>
+                        <li><strong>PyTorch Video</strong> - 视频深度学习</li>
+                        <li><strong>TensorFlow Hub</strong> - 预训练视频模型</li>
+                        <li><strong>Hugging Face</strong> - 视频生成模型（Video LDM, Zeroscope）</li>
+                        <li><strong>ComfyUI</strong> - 视频生成工作流工具</li>
+                    </ul>
+                </div>
+
+                <div class="category">
+                    <h3>分析工具</h3>
+                    <ul>
+                        <li><strong>VMAF</strong> - Netflix视频质量指标</li>
+                        <li><strong>BD-Rate计算工具</strong> - 编码效率评估</li>
+                        <li><strong>QoE评估工具</strong> - 用户体验质量</li>
+                        <li><strong>视频分析Dashboard</strong> - 实时监控工具</li>
+                    </ul>
+                </div>
+
+                <div class="category">
+                    <h3>云服务</h3>
+                    <ul>
+                        <li><strong>AWS Elemental</strong> - 专业视频转码服务</li>
+                        <li><strong>Google Video AI</strong> - 视频内容分析</li>
+                        <li><strong>Azure Video Indexer</strong> - 智能视频分析</li>
+                        <li><strong>Cloudflare Stream</strong> - 低延迟流媒体分发</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources" class="section">
+        <div class="container">
+            <h2>学习资源</h2>
+
+            <div class="resource-section">
+                <h3>经典论文与标准</h3>
+                <ul class="resource-list">
+                    <li><strong>VVC (H.266) Standard</strong> - ITU-T H.266 | ISO/IEC 23090-3</li>
+                    <li><strong>"High Efficiency Video Coding (HEVC) Text Specification"</strong> - JCT-VC</li>
+                    <li><strong>"End-to-End Optimized Video Compression"</strong> - Balle et al., ICLR 2017</li>
+                    <li><strong>"VideoMAE: Masked Autoencoders for Video Learning"</strong> - Tong et al., 2022</li>
+                    <li><strong>"Neural Video Compression with Multi-Frame Motion Compensation"</strong> - Agustsson et al., 2020</li>
+                    <li><strong>"Stable Video Diffusion"</strong> - Stability AI, 2023</li>
+                </ul>
+            </div>
+
+            <div class="resource-section">
+                <h3>推荐课程</h3>
+                <ul class="resource-list">
+                    <li><strong>CS231N</strong> - Stanford计算机视觉（含视频章节）</li>
+                    <li><strong>Digital Image & Video Processing</strong> - Coursera / Northwestern</li>
+                    <li><strong>Video Processing & Compression</strong> - IEEE courses</li>
+                    <li><strong>Deep Learning for Vision Systems</strong> - Manning</li>
+                </ul>
+            </div>
+
+            <div class="resource-section">
+                <h3>开源项目</h3>
+                <ul class="resource-list">
+                    <li><strong>CompressAI</strong> - PyTorch图像/视频深度学习压缩</li>
+                    <li><strong>Video-LLaMA</strong> - 大语言模型视频理解</li>
+                    <li><strong>TemporalShiftModule</strong> - 时序建模模块</li>
+                    <li><strong>SlowFast Networks</strong> - Facebook视频识别架构</li>
+                    <li><strong>VioLAN</strong> - 视频语言模型</li>
+                </ul>
+            </div>
+
+            <div class="resource-section">
+                <h3>实战建议</h3>
+                <div class="tips-grid">
+                    <div class="tip">
+                        <strong>从FFmpeg开始</strong>
+                        <p>熟练掌握FFmpeg命令行，理解视频的基本操作</p>
+                    </div>
+                    <div class="tip">
+                        <strong>实践编解码</strong>
+                        <p>用OpenCV和FFmpeg实现简单的视频编码/解码</p>
+                    </div>
+                    <div class="tip">
+                        <strong>复现论文</strong>
+                        <p>选择经典论文代码，在本地运行并理解原理</p>
+                    </div>
+                    <div class="tip">
+                        <strong>参与Kaggle</strong>
+                        <p>参加视频分类、动作识别等竞赛</p>
+                    </div>
+                    <div class="tip">
+                        <strong>关注arXiv</strong>
+                        <p>定期阅读计算机视觉和视频处理最新论文</p>
+                    </div>
+                    <div class="tip">
+                        <strong>建立项目</strong>
+                        <p>从实际问题出发，构建完整的视频处理应用</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="section alt-bg">
+        <div class="container">
+            <h2>视频技术发展时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="year">2003</div>
+                    <div class="event">H.264/AVC标准化，开启高清视频时代</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2013</div>
+                    <div class="event">H.265/HEVC发布，支持4K视频</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2015</div>
+                    <div class="event">深度学习应用于视频分类，CVPR</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2018</div>
+                    <div class="event">AV1编码开源，免版税新选择</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2020</div>
+                    <div class="event">H.266/VVC标准化，压缩效率再提升50%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2022</div>
+                    <div class="event">VideoMAE、神经视频编码兴起</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2024</div>
+                    <div class="event>Sora等长视频生成模型出现</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2025</div>
+                    <div class="event">端到端AI视频编码快速发展，VVC硬件逐渐普及</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>VideoLearn</h3>
+                    <p>视频处理技术学习资源</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="#basics">基础知识</a></li>
+                        <li><a href="#codec">编解码技术</a></li>
+                        <li><a href="#ai">AI视频处理</a></li>
+                        <li><a href="#resources">学习资源</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>推荐工具</h3>
+                    <ul>
+                        <li><a href="https://ffmpeg.org" target="_blank">FFmpeg</a></li>
+                        <li><a href="https://opencv.org" target="_blank">OpenCV</a></li>
+                        <li><a href="https://pytorch.org" target="_blank">PyTorch</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; VideoLearn. 纯静态网站</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 代码高亮（如果有代码块）
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('VideoLearn - 视频处理学习网站加载完成');
+        });
+    </script>
+</body>
+</html>
