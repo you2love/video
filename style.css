@@ -238,6 +238,28 @@ body {
     color: var(--primary-color);
 }
 
+.topic-item li strong {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.topic-item li ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+}
+
+.topic-item li ul li {
+    padding-left: 1.5rem;
+    padding: 0.3rem 0;
+    font-size: 0.95rem;
+}
+
+.topic-item li ul li:before {
+    content: "•";
+    color: var(--secondary-color);
+}
+
 /* 编解码器网格 */
 .codec-grid {
     display: grid;
