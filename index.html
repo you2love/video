@@ -46,6 +46,7 @@
                         <span class="nav-category">工具框架</span>
                         <ul class="sub-nav">
                             <li><a href="#tools">开发库与框架</a></li>
+                            <li><a href="#ffmpeg">FFmpeg详解</a></li>
                         </ul>
                     </li>
                     <li>
@@ -570,6 +571,200 @@
                                 <li><strong>Cloudflare Stream</strong> - 低延迟流媒体分发</li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ffmpeg" class="section alt-bg">
+                <div class="container">
+                    <h2>FFmpeg - 视频处理神器</h2>
+
+                    <div class="topic-item" style="margin-bottom: 2rem;">
+                        <h3>什么是FFmpeg？</h3>
+                        <p>FFmpeg是一个开源的跨平台音视频处理工具集，被誉为"视频处理的瑞士军刀"。它支持几乎所有的音视频格式和编解码器，提供完整的音视频处理解决方案。</p>
+                        <ul>
+                            <li><strong>核心功能</strong>：录制、转换、流式传输音视频</li>
+                            <li><strong>格式支持</strong>：MP4、MKV、AVI、FLV、WebM、MOV等几乎所有容器格式</li>
+                            <li><strong>编解码器</strong>：H.264、H.265、VP9、AV1、AAC、MP3等100+种编解码器</li>
+                            <li><strong>跨平台</strong>：Windows、Linux、macOS、移动平台</li>
+                            <li><strong>开源免费</strong>：基于GPL和LGPL许可证</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-item" style="margin-bottom: 2rem;">
+                        <h3>FFmpeg核心组件</h3>
+                        <p>FFmpeg由多个核心库和工具组成，每个组件负责特定的功能：</p>
+                        <ul>
+                            <li><strong>libavcodec</strong> - 编解码库，处理音视频编码解码</li>
+                            <li><strong>libavformat</strong> - 容器格式库，处理各种音视频容器</li>
+                            <li><strong>libavutil</strong> - 工具库，提供常用工具函数</li>
+                            <li><strong>libavfilter</strong> - 滤镜库，实现音视频滤镜和特效</li>
+                            <li><strong>libswscale</strong> - 图像缩放和颜色空间转换库</li>
+                            <li><strong>libswresample</strong> - 音频重采样库</li>
+                            <li><strong>ffmpeg</strong> - 命令行工具，快速实现音视频处理</li>
+                            <li><strong>ffplay</strong> - 播放器，支持播放和流媒体播放</li>
+                            <li><strong>ffprobe</strong> - 分析工具，提取音视频文件信息</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-item" style="margin-bottom: 2rem;">
+                        <h3>常用命令示例</h3>
+                        <p>FFmpeg命令行工具功能强大，以下是最常用的命令：</p>
+
+                        <div style="margin-top: 1rem;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">1. 格式转换</h4>
+                            <pre style="background: #000; color: #4af626; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem;">ffmpeg -i input.avi -c:v libx264 -c:a aac output.mp4</pre>
+                            <p style="margin-top: 0.5rem; color: var(--text-light);">将AVI文件转换为MP4格式</p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">2. 提取音频</h4>
+                            <pre style="background: #000; color: #4af626; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem;">ffmpeg -i video.mp4 -vn -acodec copy audio.aac</pre>
+                            <p style="margin-top: 0.5rem; color: var(--text-light);">从视频文件中提取音频轨道</p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">3. 视频剪辑</h4>
+                            <pre style="background: #000; color: #4af626; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem;">ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:00 -c copy output.mp4</pre>
+                            <p style="margin-top: 0.5rem; color: var(--text-light);">剪辑视频从1分钟到2分钟（使用-c copy快速复制）</p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">4. 调整分辨率</h4>
+                            <pre style="background: #000; color: #4af626; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem;">ffmpeg -i input.mp4 -vf scale=1280:720 -c:v libx264 -preset medium output.mp4</pre>
+                            <p style="margin-top: 0.5rem; color: var(--text-light);">将视频缩放到720p分辨率</p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">5. 调整帧率</h4>
+                            <pre style="background: #000; color: #4af626; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem;">ffmpeg -i input.mp4 -r 30 output.mp4</pre>
+                            <p style="margin-top: 0.5rem; color: var(--text-light);">调整视频帧率为30fps</p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">6. 添加水印</h4>
+                            <pre style="background: #000; color: #4af626; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem;">ffmpeg -i input.mp4 -i logo.png -filter_complex "overlay=10:10" output.mp4</pre>
+                            <p style="margin-top: 0.5rem; color: var(--text-light);">在视频左上角（10:10）添加logo水印</p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">7. 视频截图</h4>
+                            <pre style="background: #000; color: #4af626; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem;">ffmpeg -i input.mp4 -ss 00:00:05 -vframes 1 screenshot.png</pre>
+                            <p style="margin-top: 0.5rem; color: var(--text-light);">在5秒处截取一帧图片</p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">8. 合并视频</h4>
+                            <pre style="background: #000; color: #4af626; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem;">ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4</pre>
+                            <p style="margin-top: 0.5rem; color: var(--text-light);">合并多个视频文件（filelist.txt包含文件列表）</p>
+                        </div>
+                    </div>
+
+                    <div class="topic-item" style="margin-bottom: 2rem;">
+                        <h3>重要参数说明</h3>
+                        <p>掌握FFmpeg的关键参数，能够实现更精细的视频处理控制：</p>
+                        <ul>
+                            <li><strong>-i input</strong> - 指定输入文件</li>
+                            <li><strong>-c:v</strong> - 指定视频编码器（如 libx264、libx265、libvpx-vp9）</li>
+                            <li><strong>-c:a</strong> - 指定音频编码器（如 aac、libmp3lame、opus）</li>
+                            <li><strong>-preset</strong> - 编码预设（ultrafast、superfast、veryfast、faster、fast、medium、slow、slower、veryslow）</li>
+                            <li><strong>-crf</strong> - 恒定质量因子（0-51，值越小质量越高，推荐18-28）</li>
+                            <li><strong>-b:v</strong> - 视频比特率（如 -b:v 5M）</li>
+                            <li><strong>-b:a</strong> - 音频比特率（如 -b:a 128k）</li>
+                            <li><strong>-r</strong> - 帧率（如 -r 30）</li>
+                            <li><strong>-s</strong> - 分辨率（如 -s 1920x1080）</li>
+                            <li><strong>-vf</strong> - 视频滤镜（如 -vf scale=1280:720）</li>
+                            <li><strong>-af</strong> - 音频滤镜</li>
+                            <li><strong>-ss</strong> - 起始时间（如 -ss 00:01:00）</li>
+                            <li><strong>-t</strong> - 持续时间（如 -t 60）</li>
+                            <li><strong>-to</strong> - 结束时间</li>
+                            <li><strong>-y</strong> - 覆盖输出文件</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-item" style="margin-bottom: 2rem;">
+                        <h3>FFmpeg滤镜系统</h3>
+                        <p>FFmpeg强大的滤镜系统可以实现各种视频和音频处理效果：</p>
+                        <ul>
+                            <li><strong>scale</strong> - 缩放视频
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>-vf scale=1920:1080（固定分辨率）</li>
+                                    <li>-vf scale=iw/2:-1（宽度减半，高度自动保持比例）</li>
+                                </ul>
+                            </li>
+                            <li><strong>crop</strong> - 裁剪视频
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>-vf crop=1920:1080:0:0（从左上角裁剪1920x1080）</li>
+                                </ul>
+                            </li>
+                            <li><strong>overlay</strong> - 叠加图片或视频
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>-filter_complex "overlay=10:10"（左上角10:10位置）</li>
+                                    <li>-filter_complex "overlay=(W-w)/2:(H-h)/2"（居中）</li>
+                                </ul>
+                            </li>
+                            <li><strong>fade</strong> - 淡入淡出
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>-vf fade=in:0:30（前30帧淡入）</li>
+                                    <li>-vf fade=out:270:30（后30帧淡出）</li>
+                                </ul>
+                            </li>
+                            <li><strong>drawtext</strong> - 添加文字水印
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>-vf drawtext="text='Hello':x=10:y=10:fontsize=24:fontcolor=white"</li>
+                                </ul>
+                            </li>
+                            <li><strong>fps</strong> - 调整帧率
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>-vf fps=30（固定30fps）</li>
+                                    <li>-vf fps=fps=24000/1001（精确帧率）</li>
+                                </ul>
+                            </li>
+                            <li><strong>trim</strong> - 剪辑视频
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>-vf trim=60:120,setpts=PTS-STARTPTS（剪辑60-120秒）</li>
+                                </ul>
+                            </li>
+                            <li><strong>concat</strong> - 连接视频片段
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>-filter_complex "[0:v][1:v]concat=n=2:v=1[outv]" -map "[outv]"</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-item" style="margin-bottom: 2rem;">
+                        <h3>硬件加速</h3>
+                        <p>FFmpeg支持多种硬件加速技术，大幅提升编码速度：</p>
+                        <ul>
+                            <li><strong>NVIDIA NVENC</strong> - NVIDIA GPU硬件编码
+                                <pre style="background: #000; color: #4af626; padding: 0.8rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem; margin-top: 5px;">ffmpeg -i input.mp4 -c:v h264_nvenc -preset fast output.mp4</pre>
+                            </li>
+                            <li><strong>Intel QSV</strong> - Intel Quick Sync Video
+                                <pre style="background: #000; color: #4af626; padding: 0.8rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem; margin-top: 5px;">ffmpeg -i input.mp4 -c:v h264_qsv -preset faster output.mp4</pre>
+                            </li>
+                            <li><strong>AMD AMF</strong> - AMD Advanced Media Framework
+                                <pre style="background: #000; color: #4af626; padding: 0.8rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem; margin-top: 5px;">ffmpeg -i input.mp4 -c:v h264_amf -quality speed output.mp4</pre>
+                            </li>
+                            <li><strong>VideoToolbox</strong> - macOS/iOS硬件编码
+                                <pre style="background: #000; color: #4af626; padding: 0.8rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.85rem; margin-top: 5px;">ffmpeg -i input.mp4 -c:v h264_videotoolbox -q:v 70 output.mp4</pre>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-item">
+                        <h3>FFmpeg的应用场景</h3>
+                        <p>FFmpeg广泛应用于各个领域，是视频处理的核心工具：</p>
+                        <ul>
+                            <li><strong>视频网站</strong> - YouTube、Bilibili等平台使用FFmpeg进行视频转码</li>
+                            <li><strong>流媒体服务</strong> - 直播、点播服务的核心处理引擎</li>
+                            <li><strong>视频编辑软件</strong> - DaVinci Resolve、Shotcut等专业软件的底层引擎</li>
+                            <li><strong>AI视频处理</strong> - 与深度学习结合，实现视频超分、去噪等任务</li>
+                            <li><strong>监控系统</strong> - 实时视频编码、存储、分析</li>
+                            <li><strong>移动应用</strong> - 视频录制、编辑、压缩功能</li>
+                            <li><strong>游戏直播</strong> - OBS等推流工具的核心组件</li>
+                            <li><strong>教育培训</strong> - 视频课程制作、格式转换</li>
+                        </ul>
                     </div>
                 </div>
             </section>
