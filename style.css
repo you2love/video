@@ -643,27 +643,128 @@ footer {
     opacity: 0.6;
 }
 
+/* 代码示例部分 */
+.code-section {
+    margin-bottom: 3rem;
+}
+
+.code-section h3 {
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+    font-size: 2rem;
+}
+
+.code-block {
+    background: #1a1a2e;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+}
+
+.code-block h4 {
+    color: #a8a4e0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.code-block pre {
+    margin: 0;
+    padding: 0;
+}
+
+.code-block code {
+    display: block;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    overflow-x: auto;
+}
+
+/* 代码高亮样式 */
+.code-block .keyword {
+    color: #c792ea;
+}
+
+.code-block .string {
+    color: #c3e88d;
+}
+
+.code-block .comment {
+    color: #546e7a;
+}
+
+.code-block .function {
+    color: #82aaff;
+}
+
+.code-block .number {
+    color: #f78c6c;
+}
+
+/* 代码技巧 */
+.code-tips {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.code-tips h3 {
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+.code-tips .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.code-tips .tip {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.code-tips .tip strong {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.code-tips .tip p {
+    opacity: 0.95;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero h2 {
-        font-size: 1.5rem;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
     .feature-grid,
     .codec-grid,
     .ai-grid,
     .framework-list,
-    .tool-categories {
+    .tool-categories,
+    .tips-grid,
+    .code-tips .tips-grid {
         grid-template-columns: 1fr;
     }
+
+    .code-block {
+        padding: 1rem;
+    }
+
+    .code-block code {
+        font-size: 0.75rem;
+    }
+
+    .code-block pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
 
     .timeline:before {
         left: 20px;
