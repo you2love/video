@@ -31,7 +31,7 @@ body {
     padding: 0 20px;
 }
 
-/* 导航栏 */
+/* 顶部导航栏 */
 .navbar {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     padding: 1rem 0;
@@ -72,6 +72,106 @@ body {
 
 .nav-links a:hover {
     opacity: 0.8;
+}
+
+/* 布局容器 - 侧边栏布局 */
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 侧边栏 */
+.sidebar {
+    width: 280px;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 侧边栏头部 */
+.sidebar-header {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h1 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* 侧边栏导航 */
+.sidebar-nav {
+    padding: 1rem 0;
+}
+
+.nav-tree {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-tree > li {
+    margin-bottom: 0.5rem;
+}
+
+/* 导航分类 */
+.nav-category {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 1.5rem 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 子导航 */
+.sub-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sub-nav li {
+    padding: 0;
+}
+
+.sub-nav a {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 0.6rem 1.5rem 0.6rem 2rem;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.sub-nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-left-color: rgba(255, 255, 255, 0.5);
+}
+
+.sub-nav a.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-left-color: white;
+    font-weight: 600;
+}
+
+/* 主内容区 */
+.main-content {
+    flex: 1;
+    background: var(--bg-light);
+    min-width: 0;
 }
 
 /* Hero区域 */
@@ -595,53 +695,6 @@ body {
     color: var(--text-dark);
 }
 
-/* 页脚 */
-footer {
-    background: var(--text-dark);
-    color: white;
-    padding: 3rem 0 1rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-section h3 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section li {
-    padding: 0.4rem 0;
-}
-
-.footer-section a {
-    color: white;
-    text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-}
-
-.footer-section a:hover {
-    opacity: 1;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-bottom p {
-    opacity: 0.6;
-}
 
 /* 代码示例部分 */
 .code-section {
@@ -655,16 +708,17 @@ footer {
 }
 
 .code-block {
-    background: #1a1a2e;
+    background: #000000;
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow);
     overflow-x: auto;
+    border: 1px solid #333;
 }
 
 .code-block h4 {
-    color: #a8a4e0;
+    color: #4af626;
     margin-bottom: 1rem;
     font-size: 1.1rem;
     font-weight: 600;
@@ -680,7 +734,7 @@ footer {
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     font-size: 0.85rem;
     line-height: 1.5;
-    color: #e0e0e0;
+    color: #4af626;
     overflow-x: auto;
 }
 
@@ -742,6 +796,17 @@ footer {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+    .layout-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        max-height: 300px;
+    }
+
     .feature-grid,
     .codec-grid,
     .ai-grid,
@@ -764,7 +829,6 @@ footer {
         white-space: pre-wrap;
         word-wrap: break-word;
     }
-}
 
     .timeline:before {
         left: 20px;
