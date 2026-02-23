@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI视频处理 - 视频处理学习</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#764ba2',
+                lineColor: '#667eea',
+                secondaryColor: '#764ba2',
+                tertiaryColor: '#f0f0f0'
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="layout-container">
-        <!-- 左侧导航 -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h1><a href="index.html" style="color: white; text-decoration: none;">VideoLearn</a></h1>
@@ -26,90 +40,642 @@
                             <li><a href="code.html">代码示例</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <span class="nav-category">AI视频处理</span>
+                        <ul class="sub-nav">
+                            <li><a href="#ai-overview">AI视频技术总览</a></li>
+                            <li><a href="#nvc">神经视频编码</a></li>
+                            <li><a href="#video-understanding">视频理解检索</a></li>
+                            <li><a href="#video-generation">视频生成编辑</a></li>
+                            <li><a href="#video-enhancement">视频增强技术</a></li>
+                            <li><a href="#frameworks">框架与工具</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- 主内容区 -->
         <main class="main-content">
             <section id="ai" class="section">
                 <div class="container">
-                    <h2>AI与深度学习视频处理</h2>
+                    <h2>🤖 AI视频处理可视化</h2>
+                    <p style="color: #718096; margin-bottom: 30px;">深度学习在视频领域的应用全景图</p>
 
-                    <div class="ai-section">
-                        <h3>前沿技术</h3>
-                        <div class="ai-grid">
-                            <div class="ai-card">
-                                <h4>神经视频编码 (NVC)</h4>
-                                <p>使用深度学习替代传统变换编码，通过自编码器学习最优压缩表示</p>
+                    <!-- AI视频技术总览 -->
+                    <div class="topic-item" id="ai-overview">
+                        <h3>AI视频技术全景图</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">AI视频处理技术体系</div>
+                            <pre class="mermaid">
+graph TB
+    A[AI视频处理] --> B[视频编码压缩]
+    A --> C[视频理解分析]
+    A --> D[视频生成编辑]
+    A --> E[视频增强修复]
+    
+    B --> B1[神经视频编码 NVC]
+    B --> B2[学习型编码工具]
+    B --> B3[感知优化编码]
+    
+    C --> C1[视频分类识别]
+    C --> C2[目标检测跟踪]
+    C --> C3[语义分割]
+    C --> C4[行为识别]
+    
+    D --> D1[文本生成视频]
+    D --> D2[视频风格迁移]
+    D --> D3[视频补全修复]
+    D --> D4[视频编辑合成]
+    
+    E --> E1[视频超分辨率]
+    E --> E2[视频去噪去模糊]
+    E --> E3[帧率上转换]
+    E --> E4[色彩增强HDR]
+    
+    style A fill:#667eea,color:#fff
+    style B fill:#f3e5f5
+    style C fill:#c8e6c9
+    style D fill:#fff9c4
+    style E fill:#bbdefb
+                            </pre>
+                        </div>
+
+                        <table class="visual-table">
+                            <thead>
+                                <tr>
+                                    <th>技术领域</th>
+                                    <th>核心任务</th>
+                                    <th>主要方法</th>
+                                    <th>典型应用</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>神经视频编码</strong></td>
+                                    <td>高效压缩</td>
+                                    <td>自编码器、GAN、VQ-VAE</td>
+                                    <td>下一代编码标准</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>视频理解</strong></td>
+                                    <td>语义分析</td>
+                                    <td>Transformer、3D CNN、CLIP</td>
+                                    <td>智能监控、内容审核</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>视频生成</strong></td>
+                                    <td>内容创作</td>
+                                    <td>Diffusion、GAN、Flow</td>
+                                    <td>影视制作、虚拟现实</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>视频增强</strong></td>
+                                    <td>质量提升</td>
+                                    <td>CNN、ResNet、GAN</td>
+                                    <td>老片修复、实时增强</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 神经视频编码 -->
+                    <div class="topic-item" id="nvc">
+                        <h3>神经视频编码 (NVC)</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">传统编码 vs 神经编码对比</div>
+                            <pre class="mermaid">
+graph TB
+    subgraph Traditional["传统编码流程"]
+        T1[输入帧] --> T2[预测]
+        T2 --> T3[DCT变换]
+        T3 --> T4[量化]
+        T4 --> T5[熵编码]
+    end
+    
+    subgraph Neural["神经编码流程"]
+        N1[输入帧] --> N2[编码器网络]
+        N2 --> N3[潜在表示]
+        N3 --> N4[量化]
+        N4 --> N5[熵编码]
+        N5 --> N6[码流]
+        N4 --> N7[解码器网络]
+        N7 --> N8[重建帧]
+    end
+    
+    T1 --> N1
+    
+    style Traditional fill:#e3f2fd
+    style Neural fill:#c8e6c9
+                            </pre>
+                        </div>
+
+                        <div class="comparison-box">
+                            <div class="comparison-item">
+                                <h4>传统编码</h4>
                                 <ul>
-                                    <li>基于GAN的感知优化编码</li>
-                                    <li>率失真优化的神经网络训练</li>
-                                    <li>超分辨率辅助编码</li>
+                                    <li>手工设计的变换（DCT）</li>
+                                    <li>固定的预测模式</li>
+                                    <li>模块化架构</li>
+                                    <li>计算效率高</li>
                                 </ul>
                             </div>
-                            <div class="ai-card">
-                                <h4>视频理解与检索</h4>
-                                <p>基于Transformer和CLIP的视频语义理解，支持自然语言检索</p>
+                            <div class="comparison-item">
+                                <h4>神经编码</h4>
                                 <ul>
-                                    <li>VideoMAE视频自监督学习</li>
-                                    <li>时空注意力机制</li>
-                                    <li>多模态视频-文本对齐</li>
-                                </ul>
-                            </div>
-                            <div class="ai-card">
-                                <h4>视频生成与编辑</h4>
-                                <p>扩散模型创造逼真视频内容，支持文本到视频、视频编辑</p>
-                                <ul>
-                                    <li>Stable Video Diffusion</li>
-                                    <li>Sora类长视频生成</li>
-                                    <li>可控视频生成</li>
-                                </ul>
-                            </div>
-                            <div class="ai-card">
-                                <h4>实时视频超分</h4>
-                                <p>轻量级CNN网络实现低延迟的高质量视频超分辨率</p>
-                                <ul>
-                                    <li>Real-ESRGAN Video</li>
-                                    <li>基于流网络的高效推理</li>
-                                    <li>量化加速与部署优化</li>
+                                    <li>学习型变换网络</li>
+                                    <li>自适应特征提取</li>
+                                    <li>端到端优化</li>
+                                    <li>压缩潜力大</li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="ai-frameworks">
-                        <h3>推荐框架与工具</h3>
-                        <div class="framework-list">
-                            <div class="framework">
-                                <strong>PyTorch Video</strong>
-                                <p>PyTorch生态的视频处理库，提供高效的视频数据加载和预训练模型</p>
-                            </div>
-                            <div class="framework">
-                                <strong>TensorFlow I/O</strong>
-                                <p>TensorFlow的视频IO扩展，支持多种格式和硬件加速</p>
-                            </div>
-                            <div class="framework">
-                                <strong>Decord</strong>
-                                <p>高效的视频解码库，针对深度学习场景优化</p>
-                            </div>
-                            <div class="framework">
-                                <strong>OpenCV</strong>
-                                <p>经典计算机视觉库，视频处理基础功能</p>
-                            </div>
-                            <div class="framework">
-                                <strong>FFmpeg</strong>
-                                <p>完整的视频处理工具链，编解码、转码、滤镜处理</p>
-                            </div>
-                            <div class="framework">
-                                <strong>DaVinci Resolve</strong>
-                                <p>专业视频后期处理，AI辅助调色与修复</p>
-                            </div>
+                        <div class="diagram-container">
+                            <div class="diagram-title">神经视频编码架构</div>
+                            <pre class="mermaid">
+flowchart LR
+    A[输入视频] --> B[分析变换网络]
+    B --> C[潜在空间表示]
+    C --> D[超先验网络]
+    D --> E[概率估计]
+    E --> F[算术编码]
+    F --> G[压缩码流]
+    
+    C --> H[量化]
+    H --> I[合成变换网络]
+    I --> J[重建视频]
+    
+    D --> K[边信息]
+    K --> F
+    
+    style A fill:#e3f2fd
+    style G fill:#c8e6c9
+    style J fill:#c8e6c9
+                            </pre>
+                        </div>
+
+                        <div class="knowledge-card">
+                            <h4>🔑 神经编码关键技术</h4>
+                            <ul>
+                                <li><strong>超先验模型</strong>：学习潜在表示的概率分布</li>
+                                <li><strong>感知损失</strong>：基于人眼视觉感知优化</li>
+                                <li><strong>率失真优化</strong>：联合优化码率和质量</li>
+                                <li><strong>注意力机制</strong>：自适应关注重要区域</li>
+                            </ul>
                         </div>
                     </div>
+
+                    <!-- 视频理解检索 -->
+                    <div class="topic-item" id="video-understanding">
+                        <h3>视频理解与检索</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">视频理解任务分类</div>
+                            <pre class="mermaid">
+graph TB
+    A[视频理解] --> B[时空建模]
+    A --> C[多模态学习]
+    A --> D[自监督学习]
+    
+    B --> B1[3D卷积网络]
+    B --> B2[双流网络]
+    B --> B3[时序注意力]
+    B --> B4[Transformer]
+    
+    C --> C1[视频-文本对齐]
+    C --> C2[CLIP模型]
+    C --> C3[多模态Transformer]
+    
+    D --> D1[VideoMAE]
+    D --> D2[对比学习]
+    D --> D3[掩码建模]
+    
+    style A fill:#667eea,color:#fff
+    style B fill:#f3e5f5
+    style C fill:#c8e6c9
+    style D fill:#fff9c4
+                            </pre>
+                        </div>
+
+                        <div class="diagram-container">
+                            <div class="diagram-title">Video Transformer架构</div>
+                            <pre class="mermaid">
+sequenceDiagram
+    participant V as 视频帧序列
+    participant P as Patch分割
+    participant E as 位置编码
+    participant T as Transformer编码器
+    participant C as 分类头
+    participant O as 输出结果
+    
+    V->>P: 分割为时空块
+    P->>E: 添加位置信息
+    E->>T: 多层自注意力
+    T->>T: 空间注意力
+    T->>T: 时间注意力
+    T->>C: 提取特征
+    C->>O: 分类/检索结果
+    
+    Note over T: 时空联合建模
+                            </pre>
+                        </div>
+
+                        <table class="visual-table">
+                            <thead>
+                                <tr>
+                                    <th>模型架构</th>
+                                    <th>特点</th>
+                                    <th>适用任务</th>
+                                    <th>代表模型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>3D CNN</strong></td>
+                                    <td>时空联合卷积</td>
+                                    <td>动作识别</td>
+                                    <td>I3D, SlowFast</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>双流网络</strong></td>
+                                    <td>RGB + 光流</td>
+                                    <td>动作识别</td>
+                                    <td>Two-Stream</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Video Transformer</strong></td>
+                                    <td>全局时空注意力</td>
+                                    <td>多任务</td>
+                                    <td>ViViT, TimeSformer</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>多模态模型</strong></td>
+                                    <td>视频-文本对齐</td>
+                                    <td>检索、生成</td>
+                                    <td>CLIP4Clip, VideoMAE</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 视频生成编辑 -->
+                    <div class="topic-item" id="video-generation">
+                        <h3>视频生成与编辑</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">视频生成技术演进</div>
+                            <pre class="mermaid">
+timeline
+    title 视频生成技术发展历程
+    2014 : GAN生成对抗网络 : 图片生成突破
+    2017 : VideoGAN : 早期视频生成
+    2019 : DVD-GAN : 长视频生成
+    2021 : Video Diffusion : 扩散模型应用
+    2022 : Make-A-Video : 文本到视频
+    2023 : Stable Video Diffusion : 开源视频生成
+    2024 : Sora : 长时长高质量生成
+                            </pre>
+                        </div>
+
+                        <div class="diagram-container">
+                            <div class="diagram-title">Diffusion视频生成流程</div>
+                            <pre class="mermaid">
+flowchart TB
+    subgraph Training["训练阶段"]
+        T1[视频数据] --> T2[前向扩散]
+        T2 --> T3[添加噪声]
+        T3 --> T4[噪声视频]
+        T4 --> T5[反向去噪]
+        T5 --> T6[去噪网络U-Net]
+        T6 --> T7[预测噪声]
+    end
+    
+    subgraph Generation["生成阶段"]
+        G1[随机噪声] --> G2[条件输入<br/>文本/图像]
+        G2 --> G3[迭代去噪]
+        G3 --> G4[去噪网络]
+        G4 --> G5[中间结果]
+        G5 --> G3
+        G3 --> G6[生成视频]
+    end
+    
+    T6 -.-> G4
+    
+    style Training fill:#e3f2fd
+    style Generation fill:#c8e6c9
+                            </pre>
+                        </div>
+
+                        <div class="comparison-box">
+                            <div class="comparison-item">
+                                <h4>GAN视频生成</h4>
+                                <ul>
+                                    <li>生成速度快</li>
+                                    <li>训练不稳定</li>
+                                    <li>模式崩溃问题</li>
+                                    <li>适合短视频</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>Diffusion视频生成</h4>
+                                <ul>
+                                    <li>生成质量高</li>
+                                    <li>训练稳定</li>
+                                    <li>可控性强</li>
+                                    <li>计算成本高</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>Autoregressive生成</h4>
+                                <ul>
+                                    <li>自回归预测</li>
+                                    <li>长序列建模</li>
+                                    <li>生成慢</li>
+                                    <li>连贯性好</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="knowledge-card">
+                            <h4>🎬 视频编辑技术应用</h4>
+                            <table class="visual-table" style="margin-top: 10px;">
+                                <thead>
+                                    <tr>
+                                        <th>应用类型</th>
+                                        <th>技术方法</th>
+                                        <th>典型工具</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>视频风格迁移</td>
+                                        <td>神经风格迁移</td>
+                                        <td>EbSynth, DAIN</td>
+                                    </tr>
+                                    <tr>
+                                        <td>视频补全</td>
+                                        <td>扩散模型填充</td>
+                                        <td>ProPainter</td>
+                                    </tr>
+                                    <tr>
+                                        <td>人脸编辑</td>
+                                        <td>GAN+3D先验</td>
+                                        <td>FaceSwap, DeepFaceLab</td>
+                                    </tr>
+                                    <tr>
+                                        <td>背景替换</td>
+                                        <td>语义分割+生成</td>
+                                        <td>RunwayML</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 视频增强技术 -->
+                    <div class="topic-item" id="video-enhancement">
+                        <h3>视频增强技术</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">视频超分辨率流程</div>
+                            <pre class="mermaid">
+flowchart LR
+    A[低分辨率视频] --> B[帧提取]
+    B --> C[特征提取网络]
+    C --> D[时序对齐]
+    D --> E[特征融合]
+    E --> F[上采样网络]
+    F --> G[高分辨率视频]
+    
+    H[参考帧] --> D
+    
+    style A fill:#e3f2fd
+    style G fill:#c8e6c9
+                            </pre>
+                        </div>
+
+                        <table class="visual-table">
+                            <thead>
+                                <tr>
+                                    <th>增强任务</th>
+                                    <th>输入</th>
+                                    <th>输出</th>
+                                    <th>代表方法</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>超分辨率</strong></td>
+                                    <td>低分辨率视频</td>
+                                    <td>高分辨率视频</td>
+                                    <td>EDVR, Real-ESRGAN</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>视频去噪</strong></td>
+                                    <td>噪声视频</td>
+                                    <td>清晰视频</td>
+                                    <td>ViDeNN, FastDVDNet</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>帧率上转换</strong></td>
+                                    <td>低帧率视频</td>
+                                    <td>高帧率视频</td>
+                                    <td>DAIN, RIFE</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>去模糊</strong></td>
+                                    <td>模糊视频</td>
+                                    <td>清晰视频</td>
+                                    <td>DeblurGAN, ESTRNN</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HDR转换</strong></td>
+                                    <td>SDR视频</td>
+                                    <td>HDR视频</td>
+                                    <td>HDRTVNet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="diagram-container">
+                            <div class="diagram-title">多帧视频增强架构</div>
+                            <pre class="mermaid">
+graph TB
+    A[输入多帧] --> B[特征金字塔提取]
+    B --> C[金字塔、级联和可变形对齐 PCD]
+    C --> D[时序融合]
+    D --> E[注意力模块]
+    E --> F[重建网络]
+    F --> G[输出增强帧]
+    
+    A --> H[t-2帧]
+    A --> I[t-1帧]
+    A --> J[t帧]
+    A --> K[t+1帧]
+    
+    H --> C
+    I --> C
+    J --> C
+    K --> C
+    
+    style A fill:#e3f2fd
+    style G fill:#c8e6c9
+                            </pre>
+                        </div>
+
+                        <div class="knowledge-card">
+                            <h4>⚡ 实时视频增强挑战</h4>
+                            <ul>
+                                <li><strong>计算复杂度</strong>：高清视频处理需要强大算力</li>
+                                <li><strong>延迟要求</strong>：实时应用需要低延迟处理</li>
+                                <li><strong>时序一致性</strong>：避免帧间闪烁和不连续</li>
+                                <li><strong>模型压缩</strong>：量化、剪枝、知识蒸馏</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 框架与工具 -->
+                    <div class="topic-item" id="frameworks">
+                        <h3>AI视频处理框架与工具</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">AI视频处理工具生态</div>
+                            <pre class="mermaid">
+graph TB
+    A[AI视频工具生态] --> B[数据处理]
+    A --> C[模型训练]
+    A --> D[推理部署]
+    
+    B --> B1[PyTorchVideo]
+    B --> B2[Decord]
+    B --> B3[OpenCV]
+    
+    C --> C1[PyTorch]
+    C --> C2[TensorFlow]
+    C --> C3[PaddlePaddle]
+    
+    D --> D1[TensorRT]
+    D --> D2[ONNX Runtime]
+    D --> D3[OpenVINO]
+    D --> D4[NCNN]
+    
+    style A fill:#667eea,color:#fff
+    style B fill:#f3e5f5
+    style C fill:#c8e6c9
+    style D fill:#fff9c4
+                            </pre>
+                        </div>
+
+                        <table class="visual-table">
+                            <thead>
+                                <tr>
+                                    <th>框架/工具</th>
+                                    <th>主要功能</th>
+                                    <th>特点</th>
+                                    <th>适用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>PyTorchVideo</strong></td>
+                                    <td>视频模型库</td>
+                                    <td>丰富的预训练模型</td>
+                                    <td>研究开发</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Decord</strong></td>
+                                    <td>视频解码</td>
+                                    <td>高效随机访问</td>
+                                    <td>数据加载</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MMAction2</strong></td>
+                                    <td>动作理解</td>
+                                    <td>开源全面</td>
+                                    <td>动作识别</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BasicVSR++</strong></td>
+                                    <td>视频超分</td>
+                                    <td>高性能</td>
+                                    <td>视频增强</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CompressAI</strong></td>
+                                    <td>神经编码</td>
+                                    <td>端到端训练</td>
+                                    <td>视频压缩</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="flow-steps">
+                            <div class="flow-step">数据准备</div>
+                            <div class="flow-step">模型选择</div>
+                            <div class="flow-step">训练调优</div>
+                            <div class="flow-step">模型压缩</div>
+                            <div class="flow-step">部署推理</div>
+                        </div>
+                        <p style="text-align: center; color: #718096; margin-top: 10px;">AI视频应用开发流程</p>
+
+                        <div class="knowledge-card">
+                            <h4>🎯 开发实践建议</h4>
+                            <ul>
+                                <li><strong>数据预处理</strong>：使用Decord高效加载视频帧</li>
+                                <li><strong>模型选择</strong>：优先考虑预训练模型和开源实现</li>
+                                <li><strong>性能优化</strong>：使用混合精度训练减少显存占用</li>
+                                <li><strong>部署加速</strong>：TensorRT/ONNX加速推理</li>
+                                <li><strong>质量评估</strong>：结合客观指标和主观效果</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </main>
     </div>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 高亮当前导航项
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.topic-item[id]').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
 </body>
 </html>

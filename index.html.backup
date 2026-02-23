@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频处理学习 - 计算机视觉技术指南</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout-container">
+        <!-- 左侧导航 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>VideoLearn</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="nav-tree">
+                    <li>
+                        <span class="nav-category">快速导航</span>
+                        <ul class="sub-nav">
+                            <li><a href="basics.html" class="active">基础知识</a></li>
+                            <li><a href="codec.html">编解码技术</a></li>
+                            <li><a href="ai.html">AI视频处理</a></li>
+                            <li><a href="streaming.html">在线视频</a></li>
+                            <li><a href="tools.html">工具框架</a></li>
+                            <li><a href="code.html">代码示例</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <section id="home" class="section">
+                <div class="container">
+                    <h2>欢迎来到 VideoLearn</h2>
+                    <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 2rem;">视频处理技术学习平台，从基础到实战，全面掌握视频开发技能</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3><a href="basics.html" style="color: var(--primary-color); text-decoration: none;">📚 基础知识</a></h3>
+                            <p>视频基本概念、色彩空间、图像处理、运动估计等核心理论</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3><a href="codec.html" style="color: var(--primary-color); text-decoration: none;">🎬 编解码技术</a></h3>
+                            <p>H.264、H.265、AV1等主流视频编码标准对比与应用</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3><a href="ai.html" style="color: var(--primary-color); text-decoration: none;">🤖 AI视频处理</a></h3>
+                            <p>深度学习在视频领域的应用：超分辨率、视频生成、理解</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3><a href="streaming.html" style="color: var(--primary-color); text-decoration: none;">📡 在线视频</a></h3>
+                            <p>直播、点播、流媒体协议（HLS、DASH）、CDN分发技术</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3><a href="tools.html" style="color: var(--primary-color); text-decoration: none;">🛠️ 工具框架</a></h3>
+                            <p>FFmpeg、OpenCV、PyTorch Video等开发工具和框架详解</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3><a href="code.html" style="color: var(--primary-color); text-decoration: none;">💻 代码示例</a></h3>
+                            <p>Python、Golang视频处理代码示例，实战项目参考</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, var(--primary-color)15%, var(--secondary-color)15%); border-radius: 12px;">
+                        <h3 style="margin-bottom: 1rem;">快速开始</h3>
+                        <p style="color: var(--text-light); margin-bottom: 1rem;">点击上方卡片开始学习，或从左侧导航选择感兴趣的主题</p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="basics.html" class="btn primary" style="display: inline-block; text-decoration: none; padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; background: white; color: var(--primary-color);">学习基础知识</a>
+                            <a href="tools.html" class="btn secondary" style="display: inline-block; text-decoration: none; padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; border: 2px solid var(--primary-color); color: var(--primary-color); background: white;">查看工具框架</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        console.log('VideoLearn - 视频处理学习网站加载完成');
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI视频处理 - 视频处理学习</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout-container">
+        <!-- 左侧导航 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1><a href="index.html" style="color: white; text-decoration: none;">VideoLearn</a></h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="nav-tree">
+                    <li>
+                        <span class="nav-category">其他章节</span>
+                        <ul class="sub-nav">
+                            <li><a href="basics.html">基础知识</a></li>
+                            <li><a href="codec.html">编解码技术</a></li>
+                            <li><a href="ai.html" class="active">AI视频处理</a></li>
+                            <li><a href="streaming.html">在线视频</a></li>
+                            <li><a href="tools.html">工具框架</a></li>
+                            <li><a href="code.html">代码示例</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <section id="ai" class="section">
+                <div class="container">
+                    <h2>AI与深度学习视频处理</h2>
+
+                    <div class="ai-section">
+                        <h3>前沿技术</h3>
+                        <div class="ai-grid">
+                            <div class="ai-card">
+                                <h4>神经视频编码 (NVC)</h4>
+                                <p>使用深度学习替代传统变换编码，通过自编码器学习最优压缩表示</p>
+                                <ul>
+                                    <li>基于GAN的感知优化编码</li>
+                                    <li>率失真优化的神经网络训练</li>
+                                    <li>超分辨率辅助编码</li>
+                                </ul>
+                            </div>
+                            <div class="ai-card">
+                                <h4>视频理解与检索</h4>
+                                <p>基于Transformer和CLIP的视频语义理解，支持自然语言检索</p>
+                                <ul>
+                                    <li>VideoMAE视频自监督学习</li>
+                                    <li>时空注意力机制</li>
+                                    <li>多模态视频-文本对齐</li>
+                                </ul>
+                            </div>
+                            <div class="ai-card">
+                                <h4>视频生成与编辑</h4>
+                                <p>扩散模型创造逼真视频内容，支持文本到视频、视频编辑</p>
+                                <ul>
+                                    <li>Stable Video Diffusion</li>
+                                    <li>Sora类长视频生成</li>
+                                    <li>可控视频生成</li>
+                                </ul>
+                            </div>
+                            <div class="ai-card">
+                                <h4>实时视频超分</h4>
+                                <p>轻量级CNN网络实现低延迟的高质量视频超分辨率</p>
+                                <ul>
+                                    <li>Real-ESRGAN Video</li>
+                                    <li>基于流网络的高效推理</li>
+                                    <li>量化加速与部署优化</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ai-frameworks">
+                        <h3>推荐框架与工具</h3>
+                        <div class="framework-list">
+                            <div class="framework">
+                                <strong>PyTorch Video</strong>
+                                <p>PyTorch生态的视频处理库，提供高效的视频数据加载和预训练模型</p>
+                            </div>
+                            <div class="framework">
+                                <strong>TensorFlow I/O</strong>
+                                <p>TensorFlow的视频IO扩展，支持多种格式和硬件加速</p>
+                            </div>
+                            <div class="framework">
+                                <strong>Decord</strong>
+                                <p>高效的视频解码库，针对深度学习场景优化</p>
+                            </div>
+                            <div class="framework">
+                                <strong>OpenCV</strong>
+                                <p>经典计算机视觉库，视频处理基础功能</p>
+                            </div>
+                            <div class="framework">
+                                <strong>FFmpeg</strong>
+                                <p>完整的视频处理工具链，编解码、转码、滤镜处理</p>
+                            </div>
+                            <div class="framework">
+                                <strong>DaVinci Resolve</strong>
+                                <p>专业视频后期处理，AI辅助调色与修复</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

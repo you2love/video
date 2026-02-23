@@ -5,441 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>代码示例 - 视频处理学习</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#667eea',primaryTextColor:'#fff',primaryBorderColor:'#764ba2',lineColor:'#667eea',secondaryColor:'#764ba2',tertiaryColor:'#f0f0f0'}});</script>
 </head>
 <body>
     <div class="layout-container">
-        <!-- 左侧导航 -->
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1><a href="index.html" style="color: white; text-decoration: none;">VideoLearn</a></h1>
-            </div>
+            <div class="sidebar-header"><h1><a href="index.html" style="color:white;text-decoration:none;">VideoLearn</a></h1></div>
             <nav class="sidebar-nav">
                 <ul class="nav-tree">
-                    <li>
-                        <span class="nav-category">其他章节</span>
+                    <li><span class="nav-category">其他章节</span>
                         <ul class="sub-nav">
                             <li><a href="basics.html">基础知识</a></li>
                             <li><a href="codec.html">编解码技术</a></li>
                             <li><a href="ai.html">AI视频处理</a></li>
                             <li><a href="streaming.html">在线视频</a></li>
                             <li><a href="tools.html">工具框架</a></li>
-                            <li><a href="code.html" class="active">代码示例</a></li>
+                        </ul>
+                    </li>
+                    <li><span class="nav-category">代码示例</span>
+                        <ul class="sub-nav">
+                            <li><a href="#python" class="active">Python示例</a></li>
+                            <li><a href="#golang">Golang示例</a></li>
+                            <li><a href="#workflow">开发流程</a></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- 主内容区 -->
         <main class="main-content">
-            <section id="code" class="section">
+            <section class="section">
                 <div class="container">
-                    <h2>代码示例</h2>
+                    <h2>💻 代码示例与开发流程</h2>
+                    <p style="color:#718096;margin-bottom:30px;">视频处理开发实践与流程可视化</p>
 
-                    <div class="code-section" id="code-python">
-                        <h3>Python 视频处理代码</h3>
+                    <div class="topic-item" id="python">
+                        <h3>Python视频处理流程</h3>
+                        <div class="diagram-container">
+                            <div class="diagram-title">OpenCV视频处理流程</div>
+                            <pre class="mermaid">
+flowchart TD
+    A[导入库<br/>import cv2] --> B[打开视频<br/>VideoCapture]
+    B --> C{读取帧<br/>read}
+    C -->|成功| D[处理帧<br/>图像处理]
+    D --> E[显示/保存<br/>imshow/imwrite]
+    E --> C
+    C -->|结束| F[释放资源<br/>release]
+    
+    style A fill:#e3f2fd
+    style F fill:#c8e6c9
+                            </pre>
+                        </div>
+                        <div class="knowledge-card">
+                            <h4>🐍 核心代码示例</h4>
+                            <pre style="background:#f5f5f5;padding:15px;border-radius:8px;overflow-x:auto;font-size:14px;">
+import cv2
 
-                        <div class="code-block">
-                            <h4>1. 使用OpenCV读取和播放视频</h4>
-                            <pre><code>import cv2
+# 打开视频文件或摄像头
+cap = cv2.VideoCapture('video.mp4')  # 或 0 表示摄像头
 
-# 打开视频文件
-cap = cv2.VideoCapture('input.mp4')
-
-# 检查视频是否成功打开
-if not cap.isOpened():
-    print("无法打开视频文件")
-    exit()
-
-# 获取视频属性
-fps = cap.get(cv2.CAP_PROP_FPS)
-width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-
-print(f"视频信息: {width}x{height}, {fps} FPS, 共{frame_count}帧")
-
-# 逐帧读取视频
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
         break
-
-    # 显示当前帧
-    cv2.imshow('Video', frame)
-
-    # 按'q'退出
-    if cv2.waitKey(25) & 0xFF == ord('q'):
+    
+    # 图像处理
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    edges = cv2.Canny(gray, 100, 200)
+    
+    # 显示结果
+    cv2.imshow('Edges', edges)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# 释放资源
 cap.release()
-cv2.destroyAllWindows()</code></pre>
-                        </div>
-
-                        <div class="code-block">
-                            <h4>2. 使用OpenCV保存视频</h4>
-                            <pre><code>import cv2
-import numpy as np
-
-# 创建VideoWriter对象
-width, height = 640, 480
-fps = 30
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # 或 'H264', 'XVID'
-out = cv2.VideoWriter('output.mp4', fourcc, fps, (width, height))
-
-# 写入视频帧（示例：生成渐变色视频）
-for i in range(300):
-    frame = np.zeros((height, width, 3), dtype=np.uint8)
-    frame[:, :, 0] = int(i / 300 * 255)  # B通道
-    frame[:, :, 1] = int((300 - i) / 300 * 255)  # G通道
-    frame[:, :, 2] = 128  # R通道
-    out.write(frame)
-
-# 释放资源
-out.release()
-print("视频已保存为 output.mp4")</code></pre>
-                        </div>
-
-                        <div class="code-block">
-                            <h4>3. 使用MoviePy视频编辑</h4>
-                            <pre><code>from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
-
-# 读取视频
-video = VideoFileClip('input.mp4')
-
-# 裁剪视频（从10秒到30秒）
-clipped = video.subclip(10, 30)
-
-# 添加文字
-txt_clip = TextClip("Video Demo", fontsize=70, color='white')
-txt_clip = txt_clip.set_pos('center').set_duration(5)
-
-# 合成视频
-final = CompositeVideoClip([clipped, txt_clip])
-
-# 调整速度（2倍速）
-fast_video = final.fx(lambda v: v.speedx(2))
-
-# 添加背景音乐
-# final = final.set_audio(AudioFileClip('background.mp3'))
-
-# 导出视频
-final.write_videofile('output.mp4', fps=video.fps)</code></pre>
-                        </div>
-
-                        <div class="code-block">
-                            <h4>4. 使用PyAV进行高效视频解码</h4>
-                            <pre><code>import av
-
-# 打开视频容器
-container = av.open('input.mp4')
-
-# 获取视频流
-stream = container.streams.video[0]
-
-# 逐帧解码
-for packet in container.demux(stream):
-    for frame in packet.decode():
-        # 转换为numpy数组
-        img = frame.to_ndarray(format='rgb24')
-
-        # 处理帧...
-        print(f"Frame: {frame.index}, size: {frame.width}x{frame.height}")
-
-container.close()</code></pre>
-                        </div>
-
-                        <div class="code-block">
-                            <h4>5. 调用FFmpeg命令进行视频转码</h4>
-                            <pre><code>import subprocess
-
-# 视频转码示例
-cmd = [
-    'ffmpeg',
-    '-i', 'input.mp4',           # 输入文件
-    '-c:v', 'libx264',           # 视频编码器
-    '-preset', 'medium',         # 编码预设
-    '-crf', '23',                # 质量控制
-    '-c:a', 'aac',               # 音频编码器
-    '-b:a', '128k',              # 音频比特率
-    'output.mp4'                 # 输出文件
-]
-
-subprocess.run(cmd, check=True)
-print("转码完成")</code></pre>
+cv2.destroyAllWindows()</pre>
                         </div>
                     </div>
 
-                    <div class="code-section" id="code-golang">
-                        <h3>Golang 视频处理代码</h3>
-
-                        <div class="code-block">
-                            <h4>1. 使用FFmpeg库解码视频</h4>
-                            <pre><code>package main
-
-import (
-    "fmt"
-    "github.com/mjibson/go-dsp/ffmpeg"
-)
-
-func main() {
-    // 打开视频文件
-    file, err := ffmpeg.Open("input.mp4")
-    if err != nil {
-        panic(err)
-    }
-    defer file.Close()
-
-    // 获取视频流信息
-    videoStream := file.Streams()[0]
-    fmt.Printf("视频: %dx%d, %s\n",
-        videoStream.Width(),
-        videoStream.Height(),
-        videoStream.Codec())
-
-    // 读取视频帧
-    for {
-        packet, err := file.ReadPacket()
-        if err != nil {
-            break
-        }
-
-        if packet.StreamIndex() == 0 {
-            // 处理视频包
-            fmt.Printf("读取到视频包，大小: %d bytes\n", packet.Data().Len())
-        }
-    }
-}</code></pre>
+                    <div class="topic-item" id="golang">
+                        <h3>Golang视频处理流程</h3>
+                        <div class="diagram-container">
+                            <div class="diagram-title">FFmpeg-go处理架构</div>
+                            <pre class="mermaid">
+graph TB
+    A[Go应用] --> B[ffmpeg-go绑定]
+    B --> C[FFmpeg命令构建]
+    C --> D[输入源配置]
+    D --> E[滤镜链配置]
+    E --> F[编码参数设置]
+    F --> G[输出配置]
+    G --> H[执行转码]
+    
+    style A fill:#e3f2fd
+    style H fill:#c8e6c9
+                            </pre>
                         </div>
-
-                        <div class="code-block">
-                            <h4>2. 使用Muxy封装视频流</h4>
-                            <pre><code>package main
-
-import (
-    "github.com/giorgisio/goav/avcodec"
-    "github.com/giorgisio/goav/avformat"
-)
-
-func main() {
-    // 初始化FFmpeg库
-    avformat.AvRegisterAll()
-    avcodec.AvCodecRegisterAll()
-
-    // 创建输出格式上下文
-    outFormatCtx := avformat.AvformatAllocOutputContext2(
-        nil,
-        nil,
-        "mp4",
-        "output.mp4",
-    )
-
-    // 添加视频流
-    videoStream := outFormatCtx.AvStreamNew()
-
-    // 配置视频编码参数
-    videoCodec := avcodec.AvcodecFindEncoderByName(avcodec.AV_CODEC_ID_H264)
-    videoCodecCtx := videoCodec.AvcodecAllocContext3()
-
-    videoCodecCtx.SetCodecType(avformat.AVMEDIA_TYPE_VIDEO)
-    videoCodecCtx.SetCodecId(avcodec.AV_CODEC_ID_H264)
-    videoCodecCtx.SetWidth(640)
-    videoCodecCtx.SetHeight(480)
-    videoCodecCtx.SetTimeBase(avformat.NewRational(1, 30))  // 30 FPS
-
-    // 打开编码器
-    videoCodecCtx.AvcodecOpen2(videoCodec, nil)
-
-    // 写入视频头
-    outFormatCtx.AvformatWriteHeader(nil)
-
-    // 编码和写入帧（示例）
-    // ... 编码逻辑 ...
-
-    // 写入视频尾
-    outFormatCtx.AvWriteTrailer()
-}</code></pre>
-                        </div>
-
-                        <div class="code-block">
-                            <h4>3. 使用exec包调用FFmpeg命令</h4>
-                            <pre><code>package main
-
-import (
-    "fmt"
-    "os/exec"
-)
-
-func main() {
-    // 调用FFmpeg进行视频转码
-    cmd := exec.Command(
-        "ffmpeg",
-        "-i", "input.mp4",           // 输入文件
-        "-c:v", "libx264",           // 视频编码器
-        "-preset", "medium",         // 编码预设
-        "-crf", "23",                // 质量控制
-        "-c:a", "aac",               // 音频编码器
-        "-b:a", "128k",              // 音频比特率
-        "output.mp4",                // 输出文件
-    )
-
-    // 执行命令
-    output, err := cmd.CombinedOutput()
-    if err != nil {
-        fmt.Printf("错误: %v\n", err)
-        fmt.Printf("输出: %s\n", string(output))
-        return
-    }
-
-    fmt.Println("转码完成")}</code></pre>
-                        </div>
-
-                        <div class="code-block">
-                            <h4>4. 获取视频元信息</h4>
-                            <pre><code>package main
-
-import (
-    "fmt"
-    "os/exec"
-    "encoding/json"
-)
-
-type VideoInfo struct {
-    Streams []struct {
-        CodecName string `json:"codec_name"`
-        Width     int    `json:"width"`
-        Height    int    `json:"height"`
-        Fps       string `json:"r_frame_rate"`
-        Duration  string `json:"duration"`
-    } `json:"streams"`
-}
-
-func main() {
-    // 使用ffprobe获取视频信息
-    cmd := exec.Command(
-        "ffprobe",
-        "-v", "error",
-        "-select_streams", "v:0",
-        "-show_entries", "stream=codec_name,width,height,r_frame_rate,duration",
-        "-of", "json",
-        "input.mp4",
-    )
-
-    output, err := cmd.Output()
-    if err != nil {
-        panic(err)
-    }
-
-    // 解析JSON
-    var info VideoInfo
-    if err := json.Unmarshal(output, &info); err != nil {
-        panic(err)
-    }
-
-    // 打印视频信息
-    if len(info.Streams) > 0 {
-        stream := info.Streams[0]
-        fmt.Printf("编码器: %s\n", stream.CodecName)
-        fmt.Printf("分辨率: %dx%d\n", stream.Width, stream.Height)
-        fmt.Printf("帧率: %s\n", stream.Fps)
-        fmt.Printf("时长: %s秒\n", stream.Duration)
-    }
-}</code></pre>
-                        </div>
-
-                        <div class="code-block">
-                            <h4>5. 批量视频处理</h4>
-                            <pre><code>package main
-
-import (
-    "fmt"
-    "os/exec"
-    "path/filepath"
-    "os"
-)
-
-func main() {
-    // 批量处理视频文件
-    inputDir := "./input"
-    outputDir := "./output"
-
-    // 创建输出目录
-    os.MkdirAll(outputDir, 0755)
-
-    // 遍历输入目录
-    err := filepath.Walk(inputDir, func(path string, info os.FileInfo, err error) error {
-        if err != nil {
-            return err
-        }
-
-        // 跳过目录
-        if info.IsDir() {
-            return nil
-        }
-
-        // 只处理视频文件
-        ext := filepath.Ext(path)
-        if ext != ".mp4" && ext != ".mkv" && ext != ".avi" {
-            return nil
-        }
-
-        // 构造输出路径
-        outputFile := filepath.Join(outputDir, filepath.Base(path))
-
-        // 转码命令
-        cmd := exec.Command(
-            "ffmpeg",
-            "-i", path,
-            "-c:v", "libx264",
-            "-crf", "23",
-            "-preset", "fast",
-            outputFile,
-        )
-
-        // 执行转码
-        fmt.Printf("处理: %s -> %s\n", path, outputFile)
-        if err := cmd.Run(); err != nil {
-            fmt.Printf("错误: %v\n", err)
-            return err
-        }
-
-        return nil
-    })
-
-    if err != nil {
-        panic(err)
-    }
-
-    fmt.Println("批量处理完成")
-}</code></pre>
+                        <div class="comparison-box">
+                            <div class="comparison-item">
+                                <h4>Python优势</h4>
+                                <ul><li>生态丰富</li><li>开发快速</li><li>适合原型</li><li>AI集成方便</li></ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>Golang优势</h4>
+                                <ul><li>高性能并发</li><li>部署简单</li><li>适合服务端</li><li>内存安全</li></ul>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="code-tips">
-                        <h3>实用技巧</h3>
-                        <div class="tips-grid">
-                            <div class="tip">
-                                <strong>Python开发推荐</strong>
-                                <p>使用OpenCV进行快速原型开发，PyAV用于高性能场景，MoviePy用于视频编辑</p>
-                            </div>
-                            <div class="tip">
-                                <strong>Golang开发推荐</strong>
-                                <p>使用exec包调用FFmpeg命令处理视频，使用go-av等库进行底层编解码</p>
-                            </div>
-                            <div class="tip">
-                                <strong>性能优化</strong>
-                                <p>使用硬件加速（NVIDIA NVENC、Intel QSV）提升编码速度</p>
-                            </div>
-                            <div class="tip">
-                                <strong>并行处理</strong>
-                                <p>利用Golang的goroutine或Python的多进程进行批量视频处理</p>
-                            </div>
+                    <div class="topic-item" id="workflow">
+                        <h3>视频处理项目开发流程</h3>
+                        <div class="diagram-container">
+                            <div class="diagram-title">完整开发流程</div>
+                            <pre class="mermaid">
+flowchart LR
+    A[需求分析] --> B[技术选型]
+    B --> C[环境搭建]
+    C --> D[原型开发]
+    D --> E[功能实现]
+    E --> F[性能优化]
+    F --> G[测试验证]
+    G --> H[部署上线]
+    
+    E --> I[遇到问题]
+    I --> J[查阅文档]
+    J --> K[社区求助]
+    K --> E
+    
+    style A fill:#e3f2fd
+    style H fill:#c8e6c9
+                            </pre>
+                        </div>
+                        <table class="visual-table">
+                            <thead><tr><th>开发阶段</th><th>关键任务</th><th>常用工具</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>需求分析</strong></td><td>明确功能、性能要求</td><td>文档、原型工具</td></tr>
+                                <tr><td><strong>技术选型</strong></td><td>选择合适框架和工具</td><td>FFmpeg、OpenCV等</td></tr>
+                                <tr><td><strong>原型开发</strong></td><td>快速验证可行性</td><td>Python脚本</td></tr>
+                                <tr><td><strong>性能优化</strong></td><td>提升处理速度</td><td>多线程、GPU加速</td></tr>
+                                <tr><td><strong>测试验证</strong></td><td>功能测试、压力测试</td><td>单元测试、集成测试</td></tr>
+                                <tr><td><strong>部署上线</strong></td><td>容器化、监控</td><td>Docker、K8s</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="flow-steps">
+                            <div class="flow-step">需求</div>
+                            <div class="flow-step">设计</div>
+                            <div class="flow-step">开发</div>
+                            <div class="flow-step">测试</div>
+                            <div class="flow-step">部署</div>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
     </div>
+    <script>document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth',block:'start'})}));</script>
 </body>
 </html>

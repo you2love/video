@@ -5,25 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>在线视频技术 - 视频处理学习</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#764ba2',
+                lineColor: '#667eea',
+                secondaryColor: '#764ba2',
+                tertiaryColor: '#f0f0f0'
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="layout-container">
-        <!-- 左侧导航 -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h1><a href="index.html" style="color: white; text-decoration: none;">VideoLearn</a></h1>
             </div>
             <nav class="sidebar-nav">
                 <ul class="nav-tree">
-                    <li>
-                        <span class="nav-category">在线视频</span>
-                        <ul class="sub-nav">
-                            <li><a href="#streaming" class="active">直播流技术</a></li>
-                            <li><a href="#vod">视频点播</a></li>
-                            <li><a href="#protocols">流媒体协议</a></li>
-                            <li><a href="#cdn">CDN分发</a></li>
-                        </ul>
-                    </li>
                     <li>
                         <span class="nav-category">其他章节</span>
                         <ul class="sub-nav">
@@ -34,200 +39,509 @@
                             <li><a href="code.html">代码示例</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <span class="nav-category">在线视频技术</span>
+                        <ul class="sub-nav">
+                            <li><a href="#streaming-arch" class="active">流媒体架构</a></li>
+                            <li><a href="#protocols">流媒体协议</a></li>
+                            <li><a href="#live">直播技术</a></li>
+                            <li><a href="#vod">点播技术</a></li>
+                            <li><a href="#cdn">CDN分发</a></li>
+                            <li><a href="#abr">自适应码率</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- 主内容区 -->
         <main class="main-content">
-            <section id="streaming" class="section alt-bg">
+            <section id="streaming" class="section">
                 <div class="container">
-                    <h2>在线视频技术</h2>
+                    <h2>📡 在线视频技术可视化</h2>
+                    <p style="color: #718096; margin-bottom: 30px;">直播、点播、流媒体协议架构全景</p>
 
-                    <div class="topic-list">
-                        <div class="topic-item" id="streaming-content">
-                            <h3>直播流技术</h3>
-                            <p>直播流技术是现代在线视频的核心，实现了实时的音视频传输和播放，广泛应用于直播、视频会议、在线教育等场景。</p>
-                            <ul>
-                                <li><strong>直播推流</strong>：将实时音视频数据推送到流媒体服务器
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>RTMP推流：Adobe提出的实时消息协议，广泛用于推流</li>
-                                        <li>SRT推流：Secure Reliable Transport，低延迟高可靠</li>
-                                        <li>WebRTC推流：浏览器原生支持，超低延迟</li>
-                                    </ul>
-                                </li>
-                                <li><strong>直播拉流</strong>：从流媒体服务器获取音视频数据
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>HLS拉流：HTTP Live Streaming，苹果推出，兼容性好</li>
-                                        <li>DASH拉流：Dynamic Adaptive Streaming over HTTP，国际标准</li>
-                                        <li>RTMP拉流：低延迟直播播放</li>
-                                        <li>WebRTC拉流：实时音视频通信</li>
-                                    </ul>
-                                </li>
-                                <li><strong>直播架构</strong>：典型的直播系统架构
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>采集端：摄像头、麦克风、屏幕录制</li>
-                                        <li>编码端：实时编码（H.264、H.265、AAC）</li>
-                                        <li>推流端：推送编码后的流到服务器</li>
-                                        <li>流媒体服务器：转发、转码、录制</li>
-                                        <li>CDN分发：全球节点加速</li>
-                                        <li>播放端：解码播放</li>
-                                    </ul>
-                                </li>
-                                <li><strong>直播延迟</strong>：不同协议的延迟特性
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>WebRTC：100-300ms（超低延迟）</li>
-                                        <li>SRT：50-500ms（低延迟）</li>
-                                        <li>RTMP：1-3秒（中等延迟）</li>
-                                        <li>HLS/DASH：5-30秒（高延迟）</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                    <!-- 流媒体架构 -->
+                    <div class="topic-item" id="streaming-arch">
+                        <h3>流媒体系统架构</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">在线视频系统完整架构</div>
+                            <pre class="mermaid">
+graph TB
+    subgraph Source["内容源"]
+        A1[摄像头采集]
+        A2[文件上传]
+        A3[屏幕录制]
+    end
+    
+    subgraph Ingest["内容采集"]
+        B1[推流端<br/>推流SDK]
+        B2[转码服务]
+    end
+    
+    subgraph Processing["内容处理"]
+        C1[实时转码]
+        C2[多码率编码]
+        C3[封装封装]
+        C4[内容加密]
+    end
+    
+    subgraph Distribution["内容分发"]
+        D1[CDN边缘节点]
+        D2[负载均衡]
+        D3[缓存服务]
+    end
+    
+    subgraph Playback["播放端"]
+        E1[Web播放器]
+        E2[移动App]
+        E3[智能电视]
+    end
+    
+    Source --> Ingest
+    Ingest --> Processing
+    Processing --> Distribution
+    Distribution --> Playback
+    
+    style Source fill:#e3f2fd
+    style Processing fill:#f3e5f5
+    style Distribution fill:#fff9c4
+    style Playback fill:#c8e6c9
+                            </pre>
                         </div>
 
-                        <div class="topic-item" id="vod-content">
-                            <h3>视频点播（VOD）</h3>
-                            <p>视频点播允许用户随时选择并播放视频内容，是现代视频平台的核心服务。</p>
-                            <ul>
-                                <li><strong>VOD核心流程</strong>：上传→转码→存储→分发→播放
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>上传：用户上传原始视频文件</li>
-                                        <li>转码：转换为多种码率和分辨率（多码率自适应）</li>
-                                        <li>切片：将视频切成小片段（HLS/DASH）</li>
-                                        <li>存储：分布式存储系统</li>
-                                        <li>分发：通过CDN加速分发</li>
-                                        <li>播放：客户端根据网络状况自适应选择码率</li>
-                                    </ul>
-                                </li>
-                                <li><strong>自适应码率（ABR）</strong>：根据网络状况动态调整视频质量
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>多码率：同一视频生成不同码率版本</li>
-                                        <li>自适应算法：基于带宽、缓冲区、设备能力选择</li>
-                                        <li>无缝切换：播放过程中平滑切换码率</li>
-                                        <li>常见算法：BOLA、Throughput、Buffer-based</li>
-                                    </ul>
-                                </li>
-                                <li><strong>VOD存储方案</strong>：高效的视频存储架构
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>对象存储：S3、OSS、COS等云存储</li>
-                                        <li>分层存储：热数据SSD、冷数据HDD</li>
-                                        <li>去重技术：相同内容只存储一份</li>
-                                        <li>加密存储：保护内容版权</li>
-                                    </ul>
-                                </li>
-                                <li><strong>预加载与缓冲</strong>：提升播放体验
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>预加载：提前加载后续片段</li>
-                                        <li>缓冲策略：平衡加载速度和内存占用</li>
-                                        <li>智能预加载：基于用户行为预测</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <table class="visual-table">
+                            <thead>
+                                <tr>
+                                    <th>系统组件</th>
+                                    <th>核心功能</th>
+                                    <th>关键技术</th>
+                                    <th>性能指标</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>采集推流</strong></td>
+                                    <td>音视频采集编码</td>
+                                    <td>RTMP/WebRTC推流</td>
+                                    <td>延迟 < 1秒</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>转码处理</strong></td>
+                                    <td>多码率转码</td>
+                                    <td>FFmpeg/GPU加速</td>
+                                    <td>实时处理</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CDN分发</strong></td>
+                                    <td>内容加速分发</td>
+                                    <td>边缘缓存、智能调度</td>
+                                    <td>命中率 > 95%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>播放器</strong></td>
+                                    <td>解码渲染播放</td>
+                                    <td>HLS/DASH/FLV</td>
+                                    <td>首屏 < 2秒</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 流媒体协议 -->
+                    <div class="topic-item" id="protocols">
+                        <h3>流媒体协议详解</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">主流流媒体协议对比</div>
+                            <pre class="mermaid">
+graph TB
+    A[流媒体协议] --> B[RTMP]
+    A --> C[HLS]
+    A --> D[DASH]
+    A --> E[WebRTC]
+    
+    B --> B1[基于TCP]
+    B --> B2[低延迟直播]
+    B --> B3[Flash推流]
+    
+    C --> C1[基于HTTP]
+    C --> C2[Apple标准]
+    C --> C3[m3u8+ts切片]
+    
+    D --> D1[基于HTTP]
+    D --> D2[国际标准]
+    D --> D3[mpd+m4s切片]
+    
+    E --> E1[基于UDP]
+    E --> E2[P2P传输]
+    E --> E3[实时通信]
+    
+    style A fill:#667eea,color:#fff
+    style B fill:#f3e5f5
+    style C fill:#c8e6c9
+    style D fill:#fff9c4
+    style E fill:#bbdefb
+                            </pre>
                         </div>
 
-                        <div class="topic-item" id="protocols-content">
-                            <h3>流媒体协议</h3>
-                            <p>流媒体协议定义了音视频数据的传输方式，不同的协议适用于不同的场景。</p>
-                            <ul>
-                                <li><strong>RTMP（Real-Time Messaging Protocol）</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>基于TCP，可靠传输</li>
-                                        <li>延迟1-3秒</li>
-                                        <li>广泛用于推流</li>
-                                        <li>Flash支持逐渐衰退</li>
-                                    </ul>
-                                </li>
-                                <li><strong>HLS（HTTP Live Streaming）</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>苹果推出，基于HTTP</li>
-                                        <li>切片成TS文件，m3u8索引</li>
-                                        <li>延迟5-30秒</li>
-                                        <li>全平台支持，兼容性最好</li>
-                                    </ul>
-                                </li>
-                                <li><strong>DASH（Dynamic Adaptive Streaming）</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>MPEG国际标准</li>
-                                        <li>基于HTTP，切片成MP4/TS</li>
-                                        <li>MPD清单文件</li>
-                                        <li>开源实现：dash.js</li>
-                                    </ul>
-                                </li>
-                                <li><strong>WebRTC（Web Real-Time Communication）</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>W3C标准，浏览器原生支持</li>
-                                        <li>基于UDP，超低延迟</li>
-                                        <li>支持实时音视频通信</li>
-                                        <li>应用：视频会议、直播连麦</li>
-                                    </ul>
-                                </li>
-                                <li><strong>SRT（Secure Reliable Transport）</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>基于UDP，低延迟高可靠</li>
-                                        <li>抗丢包、网络抖动</li>
-                                        <li>Haivision和Wowza联合推出</li>
-                                        <li>应用：专业广播、远程制作</li>
-                                    </ul>
-                                </li>
-                                <li><strong>RTSP（Real Time Streaming Protocol）</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>IETF标准，基于TCP/UDP</li>
-                                        <li>用于摄像头、监控设备</li>
-                                        <li>需要专用播放器</li>
-                                        <li>延迟低但兼容性差</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <table class="visual-table">
+                            <thead>
+                                <tr>
+                                    <th>协议</th>
+                                    <th>传输层</th>
+                                    <th>延迟</th>
+                                    <th>特点</th>
+                                    <th>应用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>RTMP</strong></td>
+                                    <td>TCP</td>
+                                    <td>2-5秒</td>
+                                    <td>低延迟、Flash生态</td>
+                                    <td>直播推流</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HLS</strong></td>
+                                    <td>HTTP</td>
+                                    <td>5-30秒</td>
+                                    <td>兼容性好、防火墙穿透</td>
+                                    <td>点播、直播</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>DASH</strong></td>
+                                    <td>HTTP</td>
+                                    <td>5-30秒</td>
+                                    <td>开放标准、灵活</td>
+                                    <td>点播服务</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WebRTC</strong></td>
+                                    <td>UDP</td>
+                                    <td>< 500ms</td>
+                                    <td>超低延迟、P2P</td>
+                                    <td>视频会议</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SRT</strong></td>
+                                    <td>UDP</td>
+                                    <td>1-3秒</td>
+                                    <td>抗丢包、低延迟</td>
+                                    <td>专业直播</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="diagram-container">
+                            <div class="diagram-title">HLS协议工作流程</div>
+                            <pre class="mermaid">
+sequenceDiagram
+    participant C as 客户端
+    participant S as 服务器
+    participant CDN as CDN节点
+    
+    C->>S: 请求m3u8播放列表
+    S->>C: 返回m3u8索引
+    Note over C: 解析播放列表
+    
+    loop 播放循环
+        C->>CDN: 请求TS切片
+        CDN->>C: 返回TS视频片段
+        Note over C: 解码播放
+        C->>C: 检测带宽
+        C->>S: 请求合适码率m3u8
+        S->>C: 返回新m3u8
+    end
+    
+    Note over C,CDN: 自适应码率切换
+                            </pre>
+                        </div>
+                    </div>
+
+                    <!-- 直播技术 -->
+                    <div class="topic-item" id="live">
+                        <h3>直播技术架构</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">直播系统完整流程</div>
+                            <pre class="mermaid">
+flowchart LR
+    A[主播端] --> B[推流<br/>RTMP]
+    B --> C[流媒体服务器]
+    C --> D[实时转码]
+    D --> E[切片封装]
+    E --> F[HLS/DASH流]
+    F --> G[CDN分发]
+    G --> H[边缘节点]
+    H --> I[观众端播放]
+    
+    C --> J[录制存储]
+    J --> K[点播回放]
+    
+    style A fill:#e3f2fd
+    style I fill:#c8e6c9
+                            </pre>
                         </div>
 
-                        <div class="topic-item" id="cdn-content">
-                            <h3>CDN内容分发网络</h3>
-                            <p>CDN通过在全球部署大量边缘节点，将视频内容缓存到离用户最近的位置，大幅提升访问速度和播放体验。</p>
+                        <div class="comparison-box">
+                            <div class="comparison-item">
+                                <h4>传统直播</h4>
+                                <ul>
+                                    <li>RTMP推流</li>
+                                    <li>FLV/HLS播放</li>
+                                    <li>延迟5-10秒</li>
+                                    <li>架构成熟稳定</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>低延迟直播</h4>
+                                <ul>
+                                    <li>WebRTC/SRT</li>
+                                    <li>LL-HLS协议</li>
+                                    <li>延迟 < 2秒</li>
+                                    <li>互动性强</li>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="knowledge-card">
+                            <h4>🎬 直播关键技术指标</h4>
                             <ul>
-                                <li><strong>CDN工作原理</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>边缘节点：全球部署的缓存服务器</li>
-                                        <li>智能调度：DNS或HTTP重定向引导到最近节点</li>
-                                        <li>缓存策略：热点内容自动缓存</li>
-                                        <li>回源机制：未命中时从源站获取</li>
-                                    </ul>
-                                </li>
-                                <li><strong>CDN加速技术</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>全局负载均衡：GSLB智能调度</li>
-                                        <li>协议优化：TCP优化、HTTP/2、QUIC</li>
-                                        <li>压缩传输：Gzip、Brotli压缩</li>
-                                        <li>边缘计算：在边缘节点处理业务逻辑</li>
-                                    </ul>
-                                </li>
-                                <li><strong>视频CDN特性</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>切片加速：优化小文件传输</li>
-                                        <li>自适应码率：动态调整视频质量</li>
-                                        <li>预加载：提前加载后续片段</li>
-                                        <li>防盗链：保护内容版权</li>
-                                    </ul>
-                                </li>
-                                <li><strong>主流CDN服务商</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>Akamai：全球最大CDN</li>
-                                        <li>Cloudflare：高性能CDN+安全</li>
-                                        <li>阿里云CDN：国内主流</li>
-                                        <li>腾讯云CDN：覆盖广</li>
-                                        <li>CloudFront：AWS CDN</li>
-                                    </ul>
-                                </li>
-                                <li><strong>CDN选择策略</strong>
-                                    <ul style="margin-top:5px; margin-left:20px;">
-                                        <li>覆盖范围：用户所在地区节点分布</li>
-                                        <li>带宽成本：按流量或按带宽计费</li>
-                                        <li>性能指标：延迟、命中率、稳定性</li>
-                                        <li>技术支持：API、监控、运维</li>
-                                    </ul>
-                                </li>
+                                <li><strong>首屏时间</strong>：从点击到画面显示，目标 < 2秒</li>
+                                <li><strong>端到端延迟</strong>：从采集到播放，传统5-10秒，低延迟 < 2秒</li>
+                                <li><strong>抗卡顿</strong>：缓冲区管理、码率自适应</li>
+                                <li><strong>高并发</strong>：CDN分发、P2P加速</li>
                             </ul>
                         </div>
                     </div>
+
+                    <!-- 点播技术 -->
+                    <div class="topic-item" id="vod">
+                        <h3>视频点播技术</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">点播系统处理流程</div>
+                            <pre class="mermaid">
+flowchart TB
+    A[视频上传] --> B[转码处理]
+    B --> C[多码率编码]
+    C --> D[封装切片]
+    D --> E[生成索引]
+    E --> F[CDN分发]
+    F --> G[用户播放]
+    
+    B --> B1[H.264/H.265编码]
+    C --> C1[多分辨率适配]
+    D --> D1[HLS/DASH切片]
+    E --> E1[m3u8/mpd清单]
+    
+    style A fill:#e3f2fd
+    style G fill:#c8e6c9
+                            </pre>
+                        </div>
+
+                        <table class="visual-table">
+                            <thead>
+                                <tr>
+                                    <th>点播功能</th>
+                                    <th>技术实现</th>
+                                    <th>用户体验提升</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>多码率</strong></td>
+                                    <td>自适应码率编码</td>
+                                    <td>不同网络环境下流畅播放</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>快进快退</strong></td>
+                                    <td>关键帧索引、分片加载</td>
+                                    <td>快速定位播放位置</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>断点续播</strong></td>
+                                    <td>播放进度存储</td>
+                                    <td>跨设备继续观看</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>倍速播放</strong></td>
+                                    <td>变速解码</td>
+                                    <td>灵活控制观看节奏</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>字幕多音轨</strong></td>
+                                    <td>流分离、动态切换</td>
+                                    <td>支持多语言、无障碍</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- CDN分发 -->
+                    <div class="topic-item" id="cdn">
+                        <h3>CDN内容分发网络</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">CDN分发架构</div>
+                            <pre class="mermaid">
+graph TB
+    subgraph Origin["源站"]
+        O1[流媒体服务器]
+        O2[存储系统]
+    end
+    
+    subgraph CDN["CDN网络"]
+        C1[中心节点]
+        C2[区域节点]
+        C3[边缘节点]
+    end
+    
+    subgraph Users["用户端"]
+        U1[北京用户]
+        U2[上海用户]
+        U3[广州用户]
+        U4[海外用户]
+    end
+    
+    O1 --> C1
+    C1 --> C2
+    C2 --> C3
+    
+    C3 --> U1
+    C3 --> U2
+    C3 --> U3
+    C3 --> U4
+    
+    O1 -.-> O2
+    
+    style Origin fill:#e3f2fd
+    style CDN fill:#fff9c4
+    style Users fill:#c8e6c9
+                            </pre>
+                        </div>
+
+                        <div class="comparison-box">
+                            <div class="comparison-item">
+                                <h4>CDN优势</h4>
+                                <ul>
+                                    <li>就近访问降低延迟</li>
+                                    <li>减轻源站压力</li>
+                                    <li>提高带宽利用率</li>
+                                    <li>增强抗攻击能力</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>缓存策略</h4>
+                                <ul>
+                                    <li>热点内容预缓存</li>
+                                    <li>TTL过期机制</li>
+                                    <li>LRU淘汰算法</li>
+                                    <li>动态回源策略</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="knowledge-card">
+                            <h4>⚡ CDN性能优化</h4>
+                            <ul>
+                                <li><strong>命中率优化</strong>：预热热门内容、智能缓存</li>
+                                <li><strong>调度优化</strong>：基于地理位置、网络质量智能调度</li>
+                                <li><strong>传输优化</strong>：HTTP/2、QUIC协议加速</li>
+                                <li><strong>安全防护</strong>：防盗链、DDoS防护、HTTPS加密</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 自适应码率 -->
+                    <div class="topic-item" id="abr">
+                        <h3>自适应码率技术 (ABR)</h3>
+                        
+                        <div class="diagram-container">
+                            <div class="diagram-title">ABR自适应码率切换流程</div>
+                            <pre class="mermaid">
+sequenceDiagram
+    participant P as 播放器
+    participant N as 网络监测
+    participant A as ABR算法
+    participant CDN as CDN服务器
+    
+    P->>N: 持续监测网络状态
+    N->>A: 上报带宽、延迟、丢包
+    A->>A: 计算最优码率
+    
+    alt 网络变差
+        A->>P: 切换到低码率
+        P->>CDN: 请求低码率切片
+        CDN->>P: 返回低码率视频
+    else 网络变好
+        A->>P: 切换到高码率
+        P->>CDN: 请求高码率切片
+        CDN->>P: 返回高码率视频
+    end
+    
+    Note over P,CDN: 无缝切换，不中断播放
+                            </pre>
+                        </div>
+
+                        <table class="visual-table">
+                            <thead>
+                                <tr>
+                                    <th>ABR算法</th>
+                                    <th>原理</th>
+                                    <th>优点</th>
+                                    <th>缺点</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>吞吐量算法</strong></td>
+                                    <td>基于带宽预测</td>
+                                    <td>实现简单</td>
+                                    <td>带宽波动敏感</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>缓冲区算法</strong></td>
+                                    <td>基于缓冲区水位</td>
+                                    <td>稳定性好</td>
+                                    <td>响应较慢</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>混合算法</strong></td>
+                                    <td>带宽+缓冲区</td>
+                                    <td>平衡性好</td>
+                                    <td>参数调优复杂</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>学习型算法</strong></td>
+                                    <td>机器学习预测</td>
+                                    <td>适应性强</td>
+                                    <td>训练成本高</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="flow-steps">
+                            <div class="flow-step">网络监测</div>
+                            <div class="flow-step">带宽预测</div>
+                            <div class="flow-step">码率选择</div>
+                            <div class="flow-step">平滑切换</div>
+                        </div>
+                        <p style="text-align: center; color: #718096; margin-top: 10px;">ABR工作流程</p>
+
+                        <div class="knowledge-card">
+                            <h4>🎯 ABR关键指标</h4>
+                            <ul>
+                                <li><strong>码率切换次数</strong>：越少越好，避免频繁切换</li>
+                                <li><strong>平均码率</strong>：在稳定前提下尽可能高</li>
+                                <li><strong>缓冲时长</strong>：避免缓冲不足导致卡顿</li>
+                                <li><strong>切换平滑度</strong>：无缝切换，无黑屏跳变</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </main>
