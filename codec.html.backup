@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编解码技术 - 视频处理学习</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout-container">
+        <!-- 左侧导航 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1><a href="index.html" style="color: white; text-decoration: none;">VideoLearn</a></h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="nav-tree">
+                    <li>
+                        <span class="nav-category">其他章节</span>
+                        <ul class="sub-nav">
+                            <li><a href="basics.html">基础知识</a></li>
+                            <li><a href="codec.html" class="active">编解码技术</a></li>
+                            <li><a href="ai.html">AI视频处理</a></li>
+                            <li><a href="streaming.html">在线视频</a></li>
+                            <li><a href="tools.html">工具框架</a></li>
+                            <li><a href="code.html">代码示例</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <section id="codec" class="section alt-bg">
+                <div class="container">
+                    <h2>视频编解码技术</h2>
+                    <div class="codec-grid">
+                        <div class="codec-card">
+                            <h3>H.264/AVC</h3>
+                            <span class="tag">标准</span>
+                            <p>广泛应用的视频编码标准，平衡压缩效率与解码复杂度</p>
+                            <div class="spec">
+                                <span>压缩比: 50:1</span>
+                                <span>主流支持</span>
+                            </div>
+                        </div>
+                        <div class="codec-card featured">
+                            <h3>H.265/HEVC</h3>
+                            <span class="tag hot">主流</span>
+                            <p>比H.264压缩效率提升50%，支持4K/8K视频</p>
+                            <div class="spec">
+                                <span>压缩比: 100:1</span>
+                                <span>广泛应用</span>
+                            </div>
+                        </div>
+                        <div class="codec-card">
+                            <h3>AV1</h3>
+                            <span class="tag">开源</span>
+                            <p>免版税的新一代编码标准，比H.265更高效</p>
+                            <div class="spec">
+                                <span>压缩比: 120:1</span>
+                                <span>Web首选</span>
+                            </div>
+                        </div>
+                        <div class="codec-card featured">
+                            <h3>H.266/VVC</h3>
+                            <span class="tag latest">最新标准</span>
+                            <p>最新国际标准，压缩效率比H.265提升50%</p>
+                            <div class="spec">
+                                <span>压缩比: 150:1</span>
+                                <span>8K+支持</span>
+                            </div>
+                        </div>
+                        <div class="codec-card">
+                            <h3>EVC</h3>
+                            <span class="tag">专利友好</span>
+                            <p>免版税编码标准，适合商业应用</p>
+                            <div class="spec">
+                                <span>压缩比: 90:1</span>
+                                <span>低许可费</span>
+                            </div>
+                        </div>
+                        <div class="codec-card">
+                            <h3>VP9</h3>
+                            <span class="tag">Google</span>
+                            <p>Google推出的开源编码，YouTube主要格式</p>
+                            <div class="spec">
+                                <span>压缩比: 80:1</span>
+                                <span>Web优化</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-table">
+                        <h3>编码标准对比</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>标准</th>
+                                    <th>压缩效率</th>
+                                    <th>编码复杂度</th>
+                                    <th>解码复杂度</th>
+                                    <th>硬件支持</th>
+                                    <th>典型应用</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>H.264</td>
+                                    <td>基准</td>
+                                    <td>低</td>
+                                    <td>极低</td>
+                                    <td>所有设备</td>
+                                    <td>传统应用</td>
+                                </tr>
+                                <tr>
+                                    <td>H.265</td>
+                                    <td>2x</td>
+                                    <td>中高</td>
+                                    <td>中</td>
+                                    <td>广泛</td>
+                                    <td>4K流媒体</td>
+                                </tr>
+                                <tr>
+                                    <td>AV1</td>
+                                    <td>2.3x</td>
+                                    <td>高</td>
+                                    <td>中高</td>
+                                    <td>新增</td>
+                                    <td>Web应用</td>
+                                </tr>
+                                <tr>
+                                    <td>H.266</td>
+                                    <td>3x</td>
+                                    <td>极高</td>
+                                    <td>高</td>
+                                    <td>新兴</td>
+                                    <td>8K+内容</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
